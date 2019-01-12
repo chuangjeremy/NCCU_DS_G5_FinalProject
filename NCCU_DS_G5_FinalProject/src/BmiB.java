@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -6,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Main
+ * Servlet implementation class BmiB
  */
-@WebServlet("/Main")
-public class Main extends HttpServlet {
+@WebServlet("/BmiB")
+public class BmiB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	String GitHub = "https://github.com/chuangjeremy/NCCU_DS_G5_FinalProject.git";
-    
-	public Main() {
+    public BmiB() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +27,10 @@ public class Main extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.getWriter().println("HelloWorld!");
+		String requestUri = request.getRequestURI();
+		request.setAttribute("requestUri", requestUri);
+		request.getRequestDispatcher("Bmi.jsp")
+		 .forward(request, response); 
 	}
 
 	/**
@@ -36,8 +38,8 @@ public class Main extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.getRequestDispatcher("Bmiresult.jsp")
+		 .forward(request, response);
 	}
 
 }
-
