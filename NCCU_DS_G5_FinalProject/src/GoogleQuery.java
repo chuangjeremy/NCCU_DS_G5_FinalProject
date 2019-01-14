@@ -20,7 +20,7 @@ public class GoogleQuery
 	public GoogleQuery(String searchKeyword)
 	{
 		this.searchKeyword = searchKeyword;
-		this.url = "http://www.google.com/search?q="+searchKeyword+ "+recipe" +"&oe=utf8&num=50";
+		this.url = "http://www.google.com/search?q="+searchKeyword+ "+recipe" +"&oe=utf8&num=10";
 	}
 	
 	private String fetchContent() throws IOException
@@ -75,7 +75,7 @@ public class GoogleQuery
 		return retVal;
 	}
 	
-	public ArrayList<String> getSubLink() throws IOException{
+	public ArrayList<String> getSubLink(URL url) throws IOException{
 		  ArrayList<String> subLinkArray= new ArrayList<String>() ;
 		  if(content==null) {
 			  content=fetchContent();

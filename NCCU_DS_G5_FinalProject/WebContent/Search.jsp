@@ -15,6 +15,7 @@
 <option selected>食材</option>
 <option value='chicken'>雞肉</option>
 <option value='pork'>豬肉</option>
+<option value='apple'>蘋果</option>
 </select>
 
 <select name='food1' style='width:180px'>
