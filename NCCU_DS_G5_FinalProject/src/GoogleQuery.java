@@ -27,7 +27,7 @@ public class GoogleQuery
 		String retVal = "";
 		URL u = new URL(url);
 		URLConnection conn = u.openConnection();
-		conn.setRequestProperty("User-agent", "Chrome/7.0.517.44");
+		conn.setRequestProperty("User-agent", "Chrome/71.0.3578.98");
 		InputStream in = conn.getInputStream();
 		InputStreamReader inReader = new InputStreamReader(in,"utf-8");
 		BufferedReader bufReader = new BufferedReader(inReader);

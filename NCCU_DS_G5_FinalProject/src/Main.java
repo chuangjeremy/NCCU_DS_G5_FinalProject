@@ -1,43 +1,30 @@
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.Map;
+import java.util.HashMap;
 
-/**
- * Servlet implementation class Main
- */
-@WebServlet("/Main")
-public class Main extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	String GitHub = "https://github.com/chuangjeremy/NCCU_DS_G5_FinalProject.git";
-    
-	public Main() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.getWriter().println("HelloWorld!");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-}
-
+public class Main {
+	public HashMap<String,Integer> hashmap;
+ public static void main(String[] args) throws IOException {
+ new Main();
+ }
+ public Main() {
+  hashmap=new HashMap<String,Integer>();
+  List<Map.Entry<String, Integer>> listdata = new ArrayList<Map.Entry<String,Integer>>(hashmap.entrySet());
+  Collections.sort(listdata,new Comparator <Map.Entry<String, Integer>>(){
+	  public int comapre(Map.Entry<String, Integer>entry1,Map.Entry<String, Integer> entry2) {
+		  return (entry2.getValue()-entry1.getValue());
+	  }
+  });
+  for (Map.Entry<String, Integer>entry:listdata) {
+	  print(entry.getKey());
+  }
+  
+  
+  
+ }
+ private void print(String name) {
+	 System.out.println(name+"\t"+hashmap.get(name));
+ }
+ }
