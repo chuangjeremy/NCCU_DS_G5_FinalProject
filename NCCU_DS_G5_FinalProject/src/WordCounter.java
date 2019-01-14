@@ -67,20 +67,6 @@ public class WordCounter {
 
   
   }
-  public ArrayList<String> getSubLink() throws IOException{
-	  ArrayList<String> subLinkArray= new ArrayList<String>() ;
-	  if(content==null) {
-		  content=fetchContent();
-	  }
-	  int indexOfOpen=0;
-	  while((indexOfOpen=content.indexOf("a href=\"",indexOfOpen))!=-1) {
-		  indexOfOpen=indexOfOpen+8;
-		  int indexOfClose=content.indexOf("\"", indexOfOpen);
-		  String subLink=content.substring(indexOfOpen, indexOfClose);
-		  subLinkArray.add(subLink);
-		  indexOfOpen=indexOfClose;
-	  }
-	  return subLinkArray;
-  }
+  
 
 }

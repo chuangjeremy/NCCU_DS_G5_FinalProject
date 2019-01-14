@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.jsoup.Jsoup;
@@ -73,6 +74,22 @@ public class GoogleQuery
 		
 		return retVal;
 	}
+	
+	public ArrayList<String> getSubLink() throws IOException{
+		  ArrayList<String> subLinkArray= new ArrayList<String>() ;
+		  if(content==null) {
+			  content=fetchContent();
+		  }
+		  int indexOfOpen=0;
+		  while((indexOfOpen=content.indexOf("a href=\"",indexOfOpen))!=-1) {
+			  indexOfOpen=indexOfOpen+8;
+			  int indexOfClose=content.indexOf("\"", indexOfOpen);
+			  String subLink=content.substring(indexOfOpen, indexOfClose);
+			  subLinkArray.add(subLink);
+			  indexOfOpen=indexOfClose;
+		  }
+		  return subLinkArray;
+	  }
 	
 	
 }
