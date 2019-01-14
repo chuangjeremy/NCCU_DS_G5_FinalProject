@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -34,13 +32,15 @@ public class TestProject extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		if(request.getParameter("keyword")== null) {
+	
+		if(request.getParameter("food")== null || request.getParameter("cook")== null ) {
 			String requestUri = request.getRequestURI();
 			request.setAttribute("requestUri", requestUri);
 			request.getRequestDispatcher("Search.jsp").forward(request, response);
 			return;
 		}
-		GoogleQuery google = new GoogleQuery(request.getParameter("keyword"));
+		String keyword = request.getParameter("food")  + request.getParameter("cook")+ request.getParameter("food1")+ request.getParameter("food2");
+		GoogleQuery google = new GoogleQuery(keyword);
 		HashMap<String, String> query = google.query();
 		
 		String[][] s = new String[query.size()][2];
