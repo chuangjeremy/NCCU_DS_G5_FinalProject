@@ -33,18 +33,24 @@ public class GoogleQuery
 	private String fetchContent() throws IOException
 	{
 		String retVal = "";
-		URL u = new URL(url);
-		URLConnection conn = u.openConnection();
-		conn.setRequestProperty("User-agent", "Chrome/71.0.3578.98");
-		InputStream in = conn.getInputStream();
-		InputStreamReader inReader = new InputStreamReader(in,"utf-8");
-		BufferedReader bufReader = new BufferedReader(inReader);
-		
-		String line = null;
-		while((line=bufReader.readLine())!=null)
-		{
-			retVal += line;
+		try {
+			URL u = new URL(url);
+			URLConnection conn = u.openConnection();
+			conn.setRequestProperty("User-agent", "Chrome/71.0.3578.98");
+			InputStream in = conn.getInputStream();
+			InputStreamReader inReader = new InputStreamReader(in,"utf-8");
+			BufferedReader bufReader = new BufferedReader(inReader);
+			
+			String line = null;
+			while((line=bufReader.readLine())!=null)
+			{
+				retVal += line;
+			}
+		}catch(Exception e) {
+			
 		}
+		System.out.println("check");
+	
 		
 		return retVal;
 	}
@@ -72,7 +78,7 @@ public class GoogleQuery
 				String citeUrl = cite.text(); 
 //				System.out.println(title+" "+citeUrl);
 				
-				int score = getsublinkScore(citeUrl);
+				double score = getLinkScore(citeUrl);
 				Web data = new Web(citeUrl, title, score);
 				retVal.put(title, data);
 				
@@ -86,10 +92,10 @@ public class GoogleQuery
 		
 	}
 	
-	private int getsublinkScore(String citeUrl) {
-		// TODO Auto-generated method stub
+	public double getsublinkScore(String url) throws IOException{
 		return 0;
 	}
+
 
 	public double getLinkScore(String url) throws IOException{
 		
@@ -104,42 +110,59 @@ public class GoogleQuery
 		  sublinkContent_1 = temp_1.fetchContent();
 		  
 		  int indexOfOpen = 0;
-		  while((indexOfOpen=sublinkContent_1.indexOf("a href=\"",indexOfOpen))!=-1) {
-			  indexOfOpen = indexOfOpen + 8;
-			  int indexOfClose=sublinkContent_1.indexOf("\"", indexOfOpen);
-			  String subLink=sublinkContent_1.substring(indexOfOpen, indexOfClose);
-			  subLinkArray.add(subLink);
-			  indexOfOpen=indexOfClose;
+		  for(int i=0;i<3;i++) {
+			  try {
+				  indexOfOpen=sublinkContent_1.indexOf("a href=\"",indexOfOpen);
+				  indexOfOpen = indexOfOpen + 8;
+				  int indexOfClose=sublinkContent_1.indexOf("\"", indexOfOpen);
+				  String subLink=sublinkContent_1.substring(indexOfOpen, indexOfClose);
+				  subLinkArray.add(subLink);
+				  indexOfOpen=indexOfClose;
+			  }catch(Exception e){
+				  continue;
+			  }
 		  }
 		  
 		  int firstSize = subLinkArray.size();
 		  
 		  for(int i=0;i<firstSize;i++) {
-			  
-			  ArrayList<String> subLinkArray_2= new ArrayList<String>() ;
-			  WordCounter temp_2 = new WordCounter(subLinkArray.get(i));
-			  String sublinkContent_2;
-			  sublinkContent_2 = temp_2.fetchContent();
-			  int indexOfOpen_2=0;
-			  while((indexOfOpen_2=sublinkContent_2.indexOf("a href=\"",indexOfOpen_2))!=-1) {
-				  
-				  indexOfOpen_2=indexOfOpen_2+8;
-				  int indexOfClose=sublinkContent_2.indexOf("\"", indexOfOpen_2);
-				  String subLink=sublinkContent_2.substring(indexOfOpen_2, indexOfClose);
-				  subLinkArray.add(subLink);
-				  indexOfOpen=indexOfClose;
+			  try {
+//			  ArrayList<String> subLinkArray_2= new ArrayList<String>() ;
+				  WordCounter temp_2 = new WordCounter(subLinkArray.get(i));
+				  String sublinkContent_2;
+	  			  sublinkContent_2 = temp_2.fetchContent();
+				  int indexOfOpen_2=0;
+				  for(int j=0;j<3;j++) {
+					  try {
+						  indexOfOpen_2=sublinkContent_2.indexOf("a href=\"",indexOfOpen_2);
+						  indexOfOpen_2=indexOfOpen_2+8;
+						  int indexOfClose=sublinkContent_2.indexOf("\"", indexOfOpen_2);
+						  String subLink=sublinkContent_2.substring(indexOfOpen_2, indexOfClose);
+						  subLinkArray.add(subLink);
+						  indexOfOpen=indexOfClose;
+					  }catch(Exception e){
+						  continue;
+					  }
+				  }
+			  }catch(Exception e){
+				  continue;
 			  }
 		  }
 		  
 		  int lastSize = subLinkArray.size();
 		  double sublinkScore = 0;
 		  for(int i=0;i<lastSize;i++) {
-			 WebPage link = new WebPage(subLinkArray.get(i));
-			 link.setScore(this.keywords);
-			 sublinkScore += link.score;
+			  try {
+				 WebPage link = new WebPage(subLinkArray.get(i));
+				 link.setScore(this.keywords);
+				 sublinkScore += link.score;
+			  }catch(Exception e) {
+				 continue;  
+			  }
 		  }
 		  
 		  sublinkScore += home.score;
+		  System.out.println("check");
 		  
 		  return sublinkScore;
 	  }
