@@ -4,13 +4,13 @@ import java.util.ArrayList;
 public class WebPage {
  
  public String url;
- public String name;
+// public String name;
  public WordCounter counter;
  public double score;
  
- public WebPage(String url,String name) {
+ public WebPage(String url) {
   this.url = url;
-  this.name = name;
+//  this.name = name;
   this.counter = new WordCounter(url);
  }
  
