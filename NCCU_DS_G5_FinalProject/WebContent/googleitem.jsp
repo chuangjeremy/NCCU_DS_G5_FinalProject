@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="w3-top">
   <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-    <a href="http://localhost:8080/NCCU_DS_G5_FinalProject/Search.jsp" class="w3-bar-item w3-button"> <b>Reciperian</b> </a>
+    <a href="http://localhost:8080/NCCU_DS_G5_FinalProject/TestProject" class="w3-bar-item w3-button"> <b>Reciperian</b> </a>
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">About</a>
       <a href="#menu" class="w3-bar-item w3-button">Recipes</a>
