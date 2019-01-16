@@ -72,41 +72,60 @@ h1, h2, h3, h4, h5, h6 {
 	<!-- Search Keyword Section -->
 <form action='${requestUri}' method='get'>
 
+<div>
 
-	
+<input type='text' name='keyword1' placeholder = '食譜名稱'/>
+<input type='submit' value='查詢' />
+
+</div>
+<pre></pre>
+
+<br>
+
 <div>
 
 <select name='food' style='width:180px'>
-<option selected>食材</option>
-<option value='chicken'>雞肉</option>
-<option value='pork'>豬肉</option>
-<option value='apple'>蘋果</option>
+<option selected value = ''>Ingredient</option>
+<option value='chicken'>chicken</option>
+<option value='pork'>pork</option>
+<option value='beef'>beef</option>
+<option value='shellfish'>shell fish</option>
+<option value='fish'>fish</option>
+<option value='vegetable'>vegetable</option>
 </select>
 
-<select name='food1' style='width:180px'>
-<option selected>副食材</option>
-<option value='chicken'>雞肉</option>
-<option value='pork'>豬肉</option>
-</select><br>
 
-<select name='food2' style='width:180px'>
-<option selected>副食材</option>
-<option value='chicken'>雞肉</option>
-<option value='pork'>豬肉</option>
-</select>
+
+
+
 
 </div>
 <pre></pre>
 <div>
 <select name='cook' style='width:180px'>
-<option selected>烹調方式</option>
-<option value='roast'>烤</option>
-<option value='stew'>燉</option>
+<option selected value = ''>Cooking Techniques</option>
+<option value=‘Baking’>Baking</option>
+<option value=‘Boiling’>Boiling</option>
+<option value=‘Braising’>Braising</option>
+<option value=‘Browning’>Browning</option>
+<option value=‘Deepfrying’>Deep frying</option>
+<option value=‘Fermentation’>Fermentation</option>
+<option value=‘Grilling’>Grilling</option>
+<option value=‘Pickling’>Pickling</option>
+<option value=‘Roasting’>Roasting</option>
+<option value=‘Smoking’>Smoking</option>
+<option value=‘Steaming’>Steaming</option>
+<option value=‘Stew’>Stew</option>
+<option value=‘Stirfrying’>Stir Frying</option>
+<option value=‘Sugarpanning’>Sugar Panning</option>
+
+
 </select>
 </div>
 <pre></pre>
 
-<br><input type='submit' value='輸入' />
+<input type='text' name='keyword2' placeholder = '其它食材'/>
+<input type='submit' value='查詢' />
 </form>
 
 	<!-- Search Keyword Section End -->
