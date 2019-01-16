@@ -33,26 +33,45 @@ public class TestProject extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 	
-		if(request.getParameter("food")== null || request.getParameter("cook")== null ) {
+	if(request.getParameter("food")== null || request.getParameter("cook")== null ) {
 			String requestUri = request.getRequestURI();
 			request.setAttribute("requestUri", requestUri);
 			request.getRequestDispatcher("Search.jsp").forward(request, response);
 			return;
 		}
-		String keyword = request.getParameter("food")  + request.getParameter("cook")+ request.getParameter("food1")+ request.getParameter("food2");
-		GoogleQuery google = new GoogleQuery(keyword);
-		HashMap<String, String> query = google.query();
 		
-		String[][] s = new String[query.size()][2];
-		request.setAttribute("query", s);
-		int num = 0;
-		for(Entry<String, String> entry : query.entrySet()) {
-		    String key = entry.getKey();
-		    String value = entry.getValue();
-		    s[num][0] = key;
-		    s[num][1] = value;
-		    num++;
+//		String keyword = request.getParameter("keyword1") + request.getParameter("keyword2") + request.getParameter("cook") + request.getParameter("food");
+			
+//		if(request.getParameter("keyword1") == null) {
+////			if(request.getParameter("keyword2") == null) {
+////			keyword = request.getParameter("food")+ request.getParameter("cook")+request.getParameter("key");}
+//		}
+//			
+	
+		String keyword = request.getParameter("keyword1").replace(" ", "")  + request.getParameter("cook").replace(" ", "") + request.getParameter("keyword2").replace(" ", "")+ request.getParameter("food").replace(" ", "");
+		GoogleQuery google = new GoogleQuery(keyword);
+		HashMap<String, Web> query = google.query();
+		
+		
+		KeywordHeap sort = new KeywordHeap();
+		for(Web web : query.values()) {
+			sort.add(web);
 		}
+		
+//		HashMap<String,String> query_2=new HashMap<String,String>;
+		
+		
+		
+		String[][] s = sort.output();
+		request.setAttribute("query", s);
+//		int num = 0;
+//		for(Entry<String, String> entry : query.entrySet()) {
+//		    String key = entry.getKey();
+//		    String value = entry.getValue();
+//		    s[num][0] = key;
+//		    s[num][1] = value;
+//		    num++;
+//		}
 		request.getRequestDispatcher("googleitem.jsp")
 		 .forward(request, response); 
 		
