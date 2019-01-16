@@ -103,9 +103,9 @@ public class GoogleQuery
 		  String sublinkContent_1;
 		  sublinkContent_1 = temp_1.fetchContent();
 		  
-		  int indexOfOpen=0;
+		  int indexOfOpen = 0;
 		  while((indexOfOpen=sublinkContent_1.indexOf("a href=\"",indexOfOpen))!=-1) {
-			  indexOfOpen=indexOfOpen+8;
+			  indexOfOpen = indexOfOpen + 8;
 			  int indexOfClose=sublinkContent_1.indexOf("\"", indexOfOpen);
 			  String subLink=sublinkContent_1.substring(indexOfOpen, indexOfClose);
 			  subLinkArray.add(subLink);
