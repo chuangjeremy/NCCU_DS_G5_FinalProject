@@ -17,7 +17,7 @@ public class WordCounter {
   this.urlStr = urlStr;
  }
  
- private String fetchContent()throws IOException{
+ public String fetchContent()throws IOException{
   
   URL url = new URL(this.urlStr);
   URLConnection conn = url.openConnection();
