@@ -13,7 +13,7 @@ public class KeywordHeap {
 	
 	public void add(Web k) {
 		heap.offer(k);
-		System.out.println("Done");
+
 	}
 	
 	public void peek() {
@@ -34,16 +34,18 @@ public class KeywordHeap {
 
 
 
-	public void output() {
-		StringBuilder sb = new StringBuilder();
+	public String[][] output() {
+		String[][] result = new String[10][2];
 		Web k;
+		int i = 0;
 		
 		while( (k = heap.poll()) != null ) {
-			sb.append(k.toString());
-			if( heap.peek() != null) sb.append(" ");
+			result[i][0] = k.getTitle();
+			result[i][1] = k.getUrl();
+			i++;
 		}
 		
-		System.out.println(sb.toString());
+		return result;
 		
 	}
 
