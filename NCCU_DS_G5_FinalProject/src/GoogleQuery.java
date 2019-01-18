@@ -25,7 +25,7 @@ public class GoogleQuery
 	{
 		
 		this.searchKeyword = searchKeyword;
-		this.url = "http://www.google.com/search?q="+searchKeyword + "+recipe" +"&oe=utf8&num=10";
+		this.url = "http://www.google.com/search?q="+searchKeyword +"+recipe" +"&oe=utf8&num=10";
 		this.keywordlist = new KeywordList(searchKeyword);
 		this.keywords = keywordlist.keywords;
 	}
@@ -59,7 +59,7 @@ public class GoogleQuery
 	{
 		if(content==null)
 		{
-			content= fetchContent();
+			content = fetchContent();
 		}
 		HashMap<String, Web> retVal = new HashMap<String, Web>();
 		
@@ -74,9 +74,12 @@ public class GoogleQuery
 				Element h3 = li.select("h3.r").get(0);
 				String title = h3.text();
 				
-				Element cite = li.select("cite").get(0);
-				String citeUrl = cite.text(); 
-//				System.out.println(title+" "+citeUrl);
+				Element cite = li.getElementsByTag("a").first();
+				String citeUrl = "https://www.google.com.tw"+ cite.attr("href");
+				
+//				Element cite = li.select("cite").get(0);
+//				String citeUrl = cite.text(); 
+				System.out.println(title+" "+citeUrl);
 				
 				double score = getLinkScore(citeUrl);
 				Web data = new Web(citeUrl, title, score);
